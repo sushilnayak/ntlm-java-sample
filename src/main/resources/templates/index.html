@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport"/>
+    <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+    <title>NTLM Test Page</title>
+</head>
+<body>
+
+<h4>Controller Based NTLM</h4>
+<p id="rest-domain"></p>
+<p id="rest-user"></p>
+<br/>
+<h4>Controller Based NTLM</h4>
+<p id="filter-domain"></p>
+<p id="filter-user"></p>
+
+<script th:src="@{/webjars/jquery/3.7.0/jquery.min.js}"></script>
+<script>
+    $(document).ready(function () {
+        fetch("http://localhost:8080/rest/ntlm").then(d => d.json()).then(d => {
+            console.log(d)
+            $('#rest-user').text(d.username)
+            $('#rest-domain').text(d.domain)
+        })
+        fetch("http://localhost:8080/filter/ntlm").then(d => d.json()).then(d => {
+            console.log(d)
+            $('#filter-user').text(d.username)
+            $('#filter-domain').text(d.domain)
+        })
+    })
+</script>
+</body>
+</html>
